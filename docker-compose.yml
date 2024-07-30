@@ -1,0 +1,40 @@
+version: "1.0"
+
+services:
+  backend:
+    build:
+      context: owl/
+      dockerfile: Dockerfile
+    image: owl
+    container_name: parakeet-backend
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 8000
+    volumes:
+      - ./owl/:/usr/src/app/ # need help with this
+      - /usr/src/app/node_modules # need help with this
+    ports:
+      - "8000"
+    env_file: owl/.env
+    environment:
+      - NODE_ENV=development
+    networks:
+      - parakeet-network #is this right?
+
+  frontend:
+    build:
+      context: falcon/
+      dockerfile: Dockerfile
+    image: falcon-frontend
+    container_name: parakeet-frontend
+    command: npm start
+    volumes:
+      - ./falcon/:/usr/src/app
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    networks:
+      - parakeet-network
+
+networks:
+  parakeet-network:
+    driver: bridge

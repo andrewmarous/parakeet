@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+}
+
+@layer base {
+  .input-focus {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:pointer-events-none disabled:opacity-50;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.inset-shadow {
+  box-shadow: inset 0px 0px 0.5px 1.1px #65607a;
+}
+
+.katex-html {
+  display: none;
+}
+
+math {
+  margin: 1rem 0 1rem 0;
+}
+
+@layer components {
+  .card {
+    @apply flex flex-col rounded-lg border border-grey-200 bg-white p-6 shadow-sm;
+  }
+
+  .form-elements {
+    @apply flex flex-col gap-4;
+  }
+
+  .form-actions {
+    @apply mt-7;
+  }
+
+  .form {
+    @apply flex flex-col gap-2;
+  }
+
+  .SectionHeader {
+    @apply text-2xl font-semibold;
+  }
+}
+
+.background-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(/background-gradient.png);
+  background-size: cover;
+  background-position: center;
+  -webkit-filter: blur(72px);
+  filter: blur(72px);
+  opacity: 0.5;
+  z-index: -10;
+}
+
+.inset-shadow-primary {
+  box-shadow: inset 0px 0px 1px 2px #65607a;
+}
+
+.inset-shadow-primary-large {
+  box-shadow: inset 0px 0px 3px 2px #65607a;
+}
+
+.inset-shadow-primary-light {
+  box-shadow: inset 0px 0px 2px 2px #dbdbf6;
+}
+
+.inset-shadow-grey {
+  box-shadow: inset 0px 0px 5px 5px #fcfcfd;
+}
+
+.inset-shadow-blue {
+  box-shadow: inset 0px 0px 5px 2px #8ab9ff;
+}
+
+.inset-shadow-transparent {
+  box-shadow: inset 0px 0px 1px 2px rgba(252, 252, 253, 0.4);
+}
+
+.inset-shadow-transparent-sm {
+  box-shadow: inset 0px 0px 2px 1px rgba(252, 252, 253, 0.4);
+}
+
+.inset-shadow-transparent-lg {
+  box-shadow: inset 0px 0px 4px 8px rgba(252, 252, 253, 0.4);
+}
+
+.link-with-animated-underline {
+  position: relative;
+  margin-bottom: -7px;
+  padding-bottom: 2px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.link-with-animated-underline::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  right: 50%;
+  height: 1px;
+  background-color: currentColor;
+  transition:
+    left 0.3s ease,
+    right 0.3s ease;
+}
+
+.link-with-animated-underline:hover::after {
+  left: 0;
+  right: 0;
+}

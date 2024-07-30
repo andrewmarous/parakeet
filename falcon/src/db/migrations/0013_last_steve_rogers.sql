@@ -1,0 +1,1 @@
+ALTER TABLE "replies" ALTER COLUMN "poster" DROP NOT NULL;

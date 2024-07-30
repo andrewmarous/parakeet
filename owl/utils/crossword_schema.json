@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "across": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["clue", "answer", "row", "col"],
+        "properties": {
+          "clue": {
+            "type": "string",
+            "description": "The clue to display"
+          },
+          "answer": {
+            "type": "string",
+            "description": "The answer for the clue"
+          },
+          "row": {
+            "type": "integer",
+            "description": "The 0-based row on which the answer begins"
+          },
+          "col": {
+            "type": "integer",
+            "description": "The 0-based column on which the answer begins"
+          }
+        }
+      }
+    },
+    "down": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["clue", "answer", "row", "col"],
+        "properties": {
+          "clue": {
+            "type": "string",
+            "description": "The clue to display"
+          },
+          "answer": {
+            "type": "string",
+            "description": "The answer for the clue"
+          },
+          "row": {
+            "type": "integer",
+            "description": "The 0-based row on which the answer begins"
+          },
+          "col": {
+            "type": "integer",
+            "description": "The 0-based column on which the answer begins"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "description": "The (original) input-format for clues and answers. Note that while the keys/properties under 'across' and 'down' are canonically the clue/answer numbers, they can be any string value."
+}
