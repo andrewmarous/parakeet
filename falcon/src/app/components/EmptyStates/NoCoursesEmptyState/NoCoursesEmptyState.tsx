@@ -10,7 +10,7 @@ export default function NoCoursesEmptyState() {
         </p>
         <p className="text-sm text-medium-grey justify-center text-center mt-1">
           Enter a course invite code to add one. <br />
-          Text (412) 463-7856 to get a course code.
+          Text (404) 580-5480 or email andrewmarous@gmail.com to get a course code.
         </p>
       </div>
     </div>

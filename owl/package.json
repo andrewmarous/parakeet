@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@neondatabase/serverless": "^0.9.4",
     "websocket": "^1.0.34"
   }
 }

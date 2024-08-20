@@ -2,8 +2,8 @@
 FROM python:3.12
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Set working directory
 WORKDIR /app
@@ -14,6 +14,7 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN python -m venv /venv
 RUN . /venv/bin/activate
+RUN pip install --upgrade pip setuptools
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code

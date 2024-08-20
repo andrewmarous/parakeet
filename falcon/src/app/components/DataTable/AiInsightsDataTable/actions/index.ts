@@ -23,6 +23,7 @@ export async function getPromptInteraction(promptId: string): Promise<PromptT> {
     id: promptData.id,
     response: promptData.response,
     studentId: promptData.studentId,
+    approved: promptData.approved
   };
 
   return cleanedPromptData;

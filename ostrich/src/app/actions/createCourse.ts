@@ -6,7 +6,7 @@ import { generateCourseHash, generateSlug } from "@/utils";
 import { Pool } from "pg";
 
 const pool = new Pool({
-  connectionString: process.env.DB_PROD_URL,
+  connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
 
@@ -19,6 +19,7 @@ export default async function createCourse(formData: FormData) {
   const utapi = new UTApi();
   const client = await pool.connect();
 
+  const courseSchool = formData.get("courseSchool")
   const courseName = formData.get("courseName");
   const courseCode = formData.get("courseCode");
   const topics = (formData.get("topics") as string).split(",");
@@ -47,9 +48,9 @@ export default async function createCourse(formData: FormData) {
   const slug = generateSlug(courseName as string, courseCode as string);
 
   const sqlResponse = await client.query(
-    `INSERT INTO courses (teacher_code, student_code, slug, name, code, topics)
-    VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`, // Assuming you want to return the inserted row
-    [teacherHash, studentHash, slug, courseName, courseCode, topics]
+    `INSERT INTO courses (teacher_code, student_code, slug, name, code, topics, school)
+    VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`, // Assuming you want to return the inserted row
+    [teacherHash, studentHash, slug, courseName, courseCode, topics, courseSchool]
   );
 
   const courseId = sqlResponse.rows[0].id;

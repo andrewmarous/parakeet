@@ -5,6 +5,7 @@ import { useState } from "react";
 import createCourse from "../actions/createCourse";
 
 export default function CreatePage() {
+  const [courseSchool, setCourseSchool] = useState("")
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
   const [topics, setTopics] = useState("");
@@ -14,6 +15,15 @@ export default function CreatePage() {
       <Link href="/">Home</Link>
       <h2>Create Course</h2>
       <form className="form" action={createCourse}>
+        <label>
+          School of Origin
+          <input
+              name="courseSchool"
+              type="text"
+              value={courseSchool}
+              onChange={(e) => setCourseSchool(e.target.value)}
+          />
+        </label>
         <label>
           Course Name
           <input
@@ -42,7 +52,7 @@ export default function CreatePage() {
           />
         </label>
         <label>
-          Upload course content
+          Upload course content (PDFs only)
           <input name="files" type="file" multiple />
         </label>
         <button type="submit">Create Course</button>

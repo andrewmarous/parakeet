@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/nextjs";
+// @ts-ignore
 import path from "path";
 
 const config: StorybookConfig = {

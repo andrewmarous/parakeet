@@ -1,3 +1,5 @@
+"use client";
+
 import TopicInsightsDataTable from "@/app/components/DataTable/TopicInsightsDataTable/TopicInsightsDataTable";
 import { SelectPrompt } from "@/db/schema";
 import { SelectClusters } from "@/db/schema/clusters.schema";

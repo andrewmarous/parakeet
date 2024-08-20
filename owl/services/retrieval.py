@@ -15,6 +15,7 @@ from langchain_mistralai import MistralAIEmbeddings
 from langchain_openai import ChatOpenAI
 from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone
+from tokenizers import Tokenizer
 
 load_dotenv()
 
@@ -34,6 +35,9 @@ class Retrieval():
         embeddings = MistralAIEmbeddings(
             model="mistral-embed",
             mistral_api_key=os.getenv("MISTRAL"),
+            tokenizer=Tokenizer.from_pretrained(
+                'mistralai/Mixtral-8x7B-v0.1',
+                auth_token=os.getenv('HUGGINGFACE_HUB_TOKEN'))
         )
 
         vectorStore = PineconeVectorStore(

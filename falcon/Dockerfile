@@ -8,10 +8,11 @@ FROM node:20-alpine as builder
 WORKDIR /app
 
 COPY package.json ./
+COPY package-lock.json ./
 
 ###  Installing dependencies
 
-RUN npm install --silent
+RUN npm install --legacy-peer-deps
 
 # copy local files to app folder
 COPY . .

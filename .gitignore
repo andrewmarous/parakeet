@@ -48,7 +48,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
+terraform/
 downloads/
 eggs/
 .eggs/
@@ -120,7 +120,7 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
-.env
+owl/.env
 .venv
 env/
 venv/
@@ -142,5 +142,4 @@ venv.bak/
 .mypy_cache/
 
 .idea/*
-
-terraform/
+owl/.idea
