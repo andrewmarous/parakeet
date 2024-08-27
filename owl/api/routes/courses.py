@@ -61,7 +61,6 @@ class Query(BaseModel):
 
 @router.post("/{course_id}/prompt")
 async def prompt(course_id: str, query: Query):
-    print("Processing prompt...")
     try:
         # prompt course
         retrievalService = Retrieval(course_id, query.question)
