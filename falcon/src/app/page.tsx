@@ -28,6 +28,15 @@ export default function Home() {
             >
               Sign Up
             </Link>
+            <Link
+              className={buttonVariants({ variant: "tertiary" })}
+              href="https://github.com/sponsors/andrewmarous"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Donate via GitHub Sponsors"
+            >
+              Donate
+            </Link>
           </div>
         }
       />
