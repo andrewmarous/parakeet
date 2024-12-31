@@ -81,7 +81,7 @@ export default function Home() {
             href="mailto:founders@tryparakeet.com"
             className="text-blue-500 underline"
           >
-            founders@tryparakeet.com
+            support@tryparakeet.org
           </a>
         </p>
       </footer>

@@ -89,8 +89,7 @@ class TopicAlert:
 
         # Analyze clusters
         unique_clusters = np.unique(cluster_labels)
-        print(f'Number of clusters found: {len(
-            unique_clusters) - (1 if -1 in unique_clusters else 0)}')  # -1 is for outliers
+        print(f'Number of clusters found: {len(unique_clusters) - (1 if -1 in unique_clusters else 0)}')  # -1 is for outliers
 
         # Optionally, calculate density of clusters if needed (number of points per cluster volume/area/etc.)
         # This example does not compute actual volume, as that is non-trivial in high dimensions and often not directly necessary.
