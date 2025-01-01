@@ -68,6 +68,9 @@ export function AddClassDialogContent() {
         <p className="font-normal text-sm text-grey-600 mt-1">
           Enter your 8-digit course entry code.
         </p>
+          {/*<p className="font-normal text-sm text-grey-600 mt-1">*/}
+          {/*    Don't see your course? <a href="">Click here</a> to add a course*/}
+          {/*</p>*/}
       </div>
       <div>
         {isValid ? (
