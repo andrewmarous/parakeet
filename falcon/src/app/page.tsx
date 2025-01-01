@@ -47,7 +47,7 @@ export default function Home() {
             Sign up to get early access.
           </p>
           <h1 className="text-4xl font-semibold text-primary-600 leading-tight">
-            An observability platform for education
+            An AI-powered Virtual Teacher's Assistant
           </h1>
           <p className="mt-4 mb-7 text-grey-600">
             Educators turn their course materials into a AI tutor for students,
@@ -60,12 +60,6 @@ export default function Home() {
               href="/auth/signup"
             >
               Get Started
-            </Link>
-            <Link
-              className={buttonVariants({ variant: "secondary", size: "lg" })}
-              href="/ambassador"
-            >
-              Become an ambassador
             </Link>
           </div>
           <Image
