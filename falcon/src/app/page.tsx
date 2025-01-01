@@ -23,14 +23,14 @@ export default function Home() {
               Sign In
             </Link>
             <Link
-              className={buttonVariants({ variant: "primary" })}
+              className={buttonVariants({ variant: "secondary" })}
               href="/auth/signup"
             >
               Sign Up
             </Link>
             <Link
-              className={buttonVariants({ variant: "tertiary" })}
-              href="https://github.com/sponsors/andrewmarous"
+              className={buttonVariants({ variant: "primary" })}
+              href="https://buy.stripe.com/5kAdUd3Vk0J010cfYY"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Donate via GitHub Sponsors"
@@ -87,10 +87,10 @@ export default function Home() {
         <p className="text-sm text-primary-800">
           Email us at:{" "}
           <a
-            href="mailto:founders@tryparakeet.com"
+            href="mailto:support@tryparakeet.org"
             className="text-blue-500 underline"
           >
-            founders@tryparakeet.com
+            support@tryparakeet.org
           </a>
         </p>
       </footer>
