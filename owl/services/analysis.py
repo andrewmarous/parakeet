@@ -6,7 +6,7 @@ import openai
 import psycopg2
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_openai import ChatOpenAI
+from langchain_openai.chat_models.base import ChatOpenAI
 from psycopg2.extras import execute_batch
 
 load_dotenv()

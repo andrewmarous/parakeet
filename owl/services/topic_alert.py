@@ -77,6 +77,7 @@ class TopicAlert:
         return embeddings_with_metadata
 
     def analyze_prompts(self, embeddings_with_metadata):
+
         X = np.array([doc['embedding'] for doc in embeddings_with_metadata])
 
         # Scaling data helps with high-dimensional spaces

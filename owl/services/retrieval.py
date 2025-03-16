@@ -3,18 +3,18 @@ import os
 import openai
 from dotenv import load_dotenv
 from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain.memory import ChatMessageHistory
+from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain.retrievers.contextual_compression import \
     ContextualCompressionRetriever
 from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain_cohere import CohereRerank
-# from langchain.retrievers import CohereRerank, ContextualCompressionRetriever
-from langchain_community.llms import Cohere
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_mistralai import MistralAIEmbeddings
-from langchain_openai import ChatOpenAI
+from langchain_openai.chat_models.base import ChatOpenAI
+from langchain_deepseek import ChatDeepSeek
 from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone
+from pydantic import SecretStr
 from tokenizers import Tokenizer
 
 load_dotenv()
@@ -34,7 +34,7 @@ class Retrieval():
     def retrieve(self):
         embeddings = MistralAIEmbeddings(
             model="mistral-embed",
-            mistral_api_key=os.getenv("MISTRAL"),
+            mistral_api_key=SecretStr(os.getenv("MISTRAL")),
             tokenizer=Tokenizer.from_pretrained(
                 'mistralai/Mixtral-8x7B-v0.1',
                 auth_token=os.getenv('HUGGINGFACE_HUB_TOKEN'))
@@ -55,11 +55,12 @@ class Retrieval():
     def rerank_retrieve(self):
         embeddings = MistralAIEmbeddings(
             model="mistral-embed",
-            mistral_api_key=os.getenv("MISTRAL"),
+            mistral_api_key=SecretStr(os.getenv("MISTRAL")),
             tokenizer=Tokenizer.from_pretrained(
-                            'mistralai/Mixtral-8x7B-v0.1',
-                            auth_token=os.getenv('HUGGINGFACE_HUB_TOKEN'))
+                            'mistralai/Mixtral-8x7B-v0.1')
         )
+
+        print(os.getenv('OPENAI_API_KEY'))
 
         vectorStore = PineconeVectorStore(
             namespace=self.course_id, embedding=embeddings, index_name=INDEX_NAME, text_key="text_content")
@@ -67,23 +68,29 @@ class Retrieval():
         retriever = vectorStore.as_retriever(search_type="similarity_score_threshold",
                                              search_kwargs={"score_threshold": 0.6})
 
-        llm = ChatOpenAI(temperature=0)
-        retriever_from_llm = MultiQueryRetriever.from_llm(
-            retriever=retriever, llm=llm
-        )
+        try:
+            # llm = ChatDeepSeek(temperature=0, model_name='deepseek-chat')
+            llm = ChatOpenAI(temperature=0)
+            retriever_from_llm = MultiQueryRetriever.from_llm(
+                retriever=retriever, llm=llm
+            )
+        except Exception as e:
+            print(e)
 
-        compressor = CohereRerank()
+        compressor = CohereRerank(model='rerank-english-v3.0')
         compression_retriever = ContextualCompressionRetriever(
             base_compressor=compressor, base_retriever=retriever_from_llm
         )
-        compressed_docs = compression_retriever.get_relevant_documents(
-            self.query
-        )
+        try:
+            compressed_docs = compression_retriever.invoke(self.query)
+        except Exception as e:
+            print(e)
 
         return compressed_docs
 
     def prompt(self, retrieved: list, previous_context: list):
-        chat = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+        # chat = ChatDeepSeek(model_name="deepseek-chat", temperature=0)
+        chat = ChatOpenAI(temperature=0)
         # chat = Cohere(temperature=0)
 
         # Enhanced question-answering prompt with instructions for markdown formatting
@@ -109,14 +116,17 @@ class Retrieval():
 
         demo_ephemeral_chat_history.add_user_message(self.query)
 
-        # Invoke the document chain with enriched context and specific question
-        response = document_chain.invoke(
-            {
-                "messages": demo_ephemeral_chat_history.messages,
-                "user_question": self.query,
-                "context": retrieved,
-            }
-        )
+        try:
+            # Invoke the document chain with enriched context and specific question
+            response = document_chain.invoke(
+                {
+                    "messages": demo_ephemeral_chat_history.messages,
+                    "user_question": self.query,
+                    "context": retrieved,
+                }
+            )
+        except Exception as e:
+            print(e)
 
         return response, retrieved
 

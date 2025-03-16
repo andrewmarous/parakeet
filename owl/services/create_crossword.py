@@ -6,11 +6,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 import openai
 from dotenv import load_dotenv
-from langchain import hub
-from langchain.agents import AgentExecutor, create_json_chat_agent
-from langchain.prompts import PromptTemplate
-from langchain_community.tools.tavily_search import TavilySearchResults
-from langchain_core.output_parsers import JsonOutputParser
+from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers.json import JsonOutputParser
 from langchain_mistralai import MistralAIEmbeddings
 from langchain_openai import ChatOpenAI
 from langchain_pinecone import PineconeVectorStore

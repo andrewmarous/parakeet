@@ -64,7 +64,9 @@ async def prompt(course_id: str, query: Query):
     try:
         # prompt course
         retrievalService = Retrieval(course_id, query.question)
+        print('retriever initialized')
         candidates = retrievalService.rerank_retrieve()
+        print('documents retrieved')
         response, sources = retrievalService.prompt(
             candidates, previous_context=query.previous_context)
 
