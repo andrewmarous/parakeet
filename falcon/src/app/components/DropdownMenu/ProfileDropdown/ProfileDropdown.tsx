@@ -51,6 +51,9 @@ export default function ProfileDropdown() {
         <DropdownMenuItem onClick={() => router.push("/ambassador")}>
           Become an ambassador
         </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => router.push("https://buy.stripe.com/5kAdUd3Vk0J010cfYY")}>
+          Donate
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut(() => router.push("/"))}>
           Sign Out
         </DropdownMenuItem>
